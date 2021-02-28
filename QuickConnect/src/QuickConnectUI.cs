@@ -12,15 +12,32 @@ namespace QuickConnect
     {
         public static QuickConnectUI instance;
 
-        private Rect windowRect = new Rect(20, 20, 250, 50);
+        private Rect windowRect, lastRect;
+        private Rect dragRect = new Rect(0, 0, 10000, 20);
+
+        void Awake()
+        {
+            windowRect.x = Mod.windowPosX.Value;
+            windowRect.y = Mod.windowPosY.Value;
+            windowRect.width = 250;
+            windowRect.height = 50;
+            lastRect = windowRect;
+        }
 
         void OnGUI()
         {
-            GUILayout.Window(1586463, windowRect, WindowFunction, "Quick Connect");
+            windowRect = GUILayout.Window(1586463, windowRect, WindowFunction, "Quick Connect");
+            if (!lastRect.Equals(windowRect))
+            {
+                Mod.windowPosX.Value = windowRect.x;
+                Mod.windowPosY.Value = windowRect.y;
+                lastRect = windowRect;
+            }
         }
 
         void WindowFunction(int windowID)
         {
+            GUI.DragWindow(dragRect);
             if (Servers.entries.Count > 0)
             {
                 foreach (var ent in Servers.entries)
