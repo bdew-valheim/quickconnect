@@ -2,8 +2,6 @@
 using BepInEx.Configuration;
 using BepInEx.Logging;
 using HarmonyLib;
-using System.Collections.Generic;
-using UnityEngine;
 
 namespace QuickConnect
 {
