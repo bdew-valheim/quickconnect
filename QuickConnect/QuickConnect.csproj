@@ -69,8 +69,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="src\InjectPassword.cs" />
-    <Compile Include="src\InjectUI.cs" />
+    <Compile Include="src\PatchPasswordPrompt.cs" />
+    <Compile Include="src\PatchConnectFailed.cs" />
+    <Compile Include="src\PatchCharacterBack.cs" />
+    <Compile Include="src\PatchUiInit.cs" />
     <Compile Include="src\Mod.cs" />
     <Compile Include="src\QuickConnectUI.cs" />
     <Compile Include="src\Servers.cs" />

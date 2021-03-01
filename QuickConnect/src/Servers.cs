@@ -9,8 +9,6 @@ namespace QuickConnect
     {
         public static string ConfigPath = Path.GetDirectoryName(Paths.BepInExConfigPath) + Path.DirectorySeparatorChar + "quick_connect_servers.cfg";
 
-        public static string currentPass;
-
         public class Entry
         {
             public string name;
@@ -21,12 +19,6 @@ namespace QuickConnect
             public override string ToString()
             {
                 return string.Format("Server(name={0},ip={1},port={2}}", name, ip, port);
-            }
-
-            public void DoConnect()
-            {
-                currentPass = pass;
-                ZSteamMatchmaking.instance.QueueServerJoin(string.Format("{0}:{1}", ip, port));
             }
         }
 

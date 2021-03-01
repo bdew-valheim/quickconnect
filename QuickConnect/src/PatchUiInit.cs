@@ -4,7 +4,7 @@ using UnityEngine;
 namespace QuickConnect
 {
     [HarmonyPatch(typeof(FejdStartup), "SetupGui")]
-    class InjectUI
+    class PatchUiInit
     {
         static void Postfix()
         {

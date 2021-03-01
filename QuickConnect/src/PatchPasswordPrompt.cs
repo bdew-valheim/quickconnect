@@ -4,18 +4,18 @@ using System.Reflection;
 namespace QuickConnect
 {
     [HarmonyPatch(typeof(ZNet), "RPC_ClientHandshake")]
-    class InjectPassword
+    class PatchPasswordPrompt
     {
         static bool Prefix(ZNet __instance, ZRpc rpc, bool needPassword)
         {
-            if (Servers.currentPass != null)
+            string currentPass = QuickConnectUI.instance.CurrentPass();
+            if (currentPass != null)
             {
                 if (needPassword)
                 {
                     Mod.Log.LogInfo("Authenticating with saved password...");
                     MethodInfo dynMethod = typeof(ZNet).GetMethod("SendPeerInfo", BindingFlags.NonPublic | BindingFlags.Instance);
-                    dynMethod.Invoke(__instance, new object[] { rpc, Servers.currentPass });
-                    Servers.currentPass = null;
+                    dynMethod.Invoke(__instance, new object[] { rpc, currentPass });
                     return false;
                 }
                 Mod.Log.LogInfo("Server didn't want password?");
