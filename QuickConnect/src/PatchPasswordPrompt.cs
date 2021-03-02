@@ -14,6 +14,7 @@ namespace QuickConnect
                 if (needPassword)
                 {
                     Mod.Log.LogInfo("Authenticating with saved password...");
+                    __instance.m_connectingDialog.gameObject.SetActive(false);
                     MethodInfo dynMethod = typeof(ZNet).GetMethod("SendPeerInfo", BindingFlags.NonPublic | BindingFlags.Instance);
                     dynMethod.Invoke(__instance, new object[] { rpc, currentPass });
                     return false;
