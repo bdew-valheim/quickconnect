@@ -39,12 +39,14 @@ namespace QuickConnect
                             line = line.Trim();
                             if (line.Length == 0 || line.StartsWith("#")) continue;
                             var split = line.Split(':');
-                            if (split.Length == 4)
+                            if (split.Length >= 3)
                             {
                                 var aName = split[0];
                                 var aIp = split[1];
                                 var aPort = int.Parse(split[2]);
-                                var aPass = split[3];
+                                string aPass = null;
+                                if (split.Length >= 4)
+                                    aPass = split[3];
                                 entries.Add(new Entry
                                 {
                                     name = aName,
