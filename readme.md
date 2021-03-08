@@ -16,7 +16,8 @@ Config file has a list of servers in the following format:
 name:addr:port[:password]
 ```
 
-**addr** can be ether IP or a fully qualified domain name .
+**addr** can be ether IP or a fully qualified domain name.
+
 **password** is optional, you can skip it if your server doesn't need a password or if you don't want to write it down.
   
 **Example config:**
