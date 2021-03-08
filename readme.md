@@ -4,7 +4,7 @@ Adds a quick connect window with a configurable list of servers, no more dealing
   
 **Installation**
 1.  [Install BepInEx](https://valheim.thunderstore.io/package/denikson/BepInExPack_Valheim/) following the instructions at the link.
-      If you have Valheim Plus, you can skip that step as it already includes it with the download.
+      * If you have Valheim Plus, you can skip that step as it already includes it with the download.
 3.  Extract the zip file into your BepInEx folder
 4.  Edit quick_connect_servers.cfg in BepInEx/config folder to add your servers
 5.  Run the game and press connect button on title screen
