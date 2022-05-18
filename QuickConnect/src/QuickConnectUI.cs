@@ -12,7 +12,10 @@ namespace QuickConnect
 
         private Rect windowRect, lastRect, errorWinRect;
         private Rect dragRect = new Rect(0, 0, 10000, 20);
-
+        private int buttonFontSize;
+        private int labelFontSize;
+        private GUIStyle buttonStyle;
+        private GUIStyle labelStyle;
 
         private Task<IPHostEntry> resolveTask;
         private Servers.Entry connecting;
@@ -64,13 +67,26 @@ namespace QuickConnect
         {
             windowRect.x = Mod.windowPosX.Value;
             windowRect.y = Mod.windowPosY.Value;
-            windowRect.width = 250;
-            windowRect.height = 50;
+
+            buttonFontSize = Mod.buttonFontSize.Value;
+            labelFontSize = Mod.labelFontSize.Value;
+
+            windowRect.width = Mod.windowWidth.Value;
+            windowRect.height = Mod.windowHeight.Value;
             lastRect = windowRect;
         }
 
         void OnGUI()
         {
+            if (buttonStyle == null)
+            {
+                buttonStyle = new GUIStyle(GUI.skin.button);
+                buttonStyle.fontSize = buttonFontSize;
+
+                labelStyle = new GUIStyle(GUI.skin.label);
+                labelStyle.fontSize = labelFontSize;
+            }
+
             if (errorMsg != null)
             {
                 errorWinRect = GUILayout.Window(1586464, errorWinRect, DrawErrorWindow, "Error");
@@ -92,8 +108,8 @@ namespace QuickConnect
             GUI.DragWindow(dragRect);
             if (connecting != null)
             {
-                GUILayout.Label("Connecting to " + connecting.name);
-                if (GUILayout.Button("Cancel"))
+                GUILayout.Label("Connecting to " + connecting.name, labelStyle);
+                if (GUILayout.Button("Cancel", buttonStyle))
                 {
                     AbortConnect();
                 }
@@ -102,7 +118,8 @@ namespace QuickConnect
             {
                 foreach (var ent in Servers.entries)
                 {
-                    if (GUILayout.Button(ent.name))
+                    GUILayout.Label("Choose A Server:", labelStyle);
+                    if (GUILayout.Button(ent.name, buttonStyle))
                     {
                         DoConnect(ent);
                     }
@@ -110,15 +127,15 @@ namespace QuickConnect
             }
             else
             {
-                GUILayout.Label("No servers defined");
-                GUILayout.Label("Add quick_connect_servers.cfg");
+                GUILayout.Label("No servers defined", labelStyle);
+                GUILayout.Label("Add quick_connect_servers.cfg", labelStyle);
             }
         }
 
         void DrawErrorWindow(int windowID)
         {
-            GUILayout.Label(errorMsg);
-            if (GUILayout.Button("Close"))
+            GUILayout.Label(errorMsg, labelStyle);
+            if (GUILayout.Button("Close", buttonStyle))
             {
                 errorMsg = null;
             }
