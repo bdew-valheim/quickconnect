@@ -116,9 +116,9 @@ namespace QuickConnect
             }
             else if (Servers.entries.Count > 0)
             {
+                GUILayout.Label("Choose A Server:", labelStyle);
                 foreach (var ent in Servers.entries)
                 {
-                    GUILayout.Label("Choose A Server:", labelStyle);
                     if (GUILayout.Button(ent.name, buttonStyle))
                     {
                         DoConnect(ent);
